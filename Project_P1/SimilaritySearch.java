@@ -9,8 +9,8 @@ import java.io.*;
 public class SimilaritySearch {
     public static void main(String[] args) {
         // Get arguements 
-        String imagePath = "queryImages/q04.ppm";
-        String dataset = "imageDataset2_15_20";
+        String imagePath = args[0];
+        String dataset = args[1];
 
         // Create a ColorHistogram object for the image
         ColorImage image = new ColorImage(imagePath);
@@ -18,7 +18,6 @@ public class SimilaritySearch {
         ColorHistogram imageHistogram = new ColorHistogram(3);
         imageHistogram.setImage(image);
         imageHistogram.normalize();
-        imageHistogram.saveColorHistogram("check.txt");
 
         // Create a HashMap to store the distance between the image and the other images
         Map<String, Double> imageDistance = new HashMap<>();
@@ -31,9 +30,7 @@ public class SimilaritySearch {
             String fileName = child.getName();
             if (fileName.contains(".txt")) {
                 ColorHistogram other = new ColorHistogram(3, dataset + "/" + fileName);
-                other.saveColorHistogram("check3.txt");
                 other.normalize();
-                other.saveColorHistogram("check2.txt");
                 distance = imageHistogram.compare(other);
                 imageDistance.put(fileName, distance);
             }

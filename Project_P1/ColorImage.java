@@ -17,7 +17,11 @@ public class ColorImage {
         // Set the width, height, and depth
         try {
             // Create a FileReader to read the file
-            FileReader fileReader = new FileReader(filename);
+            filename = "queryImages/" + filename;
+            
+            String replacedStr = filename.replaceAll("jpg", "ppm");
+
+            FileReader fileReader = new FileReader(replacedStr);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
 
             // Skip first 2 lines
